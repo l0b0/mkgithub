@@ -185,7 +185,7 @@ then
     write_config() {
         if [ "${verbose+defined}" = defined ]
         then
-            tee -- "${config_write-}"
+            tee -- "$config_write"
         else
             set +o noclobber
             cat > "$config_write"
