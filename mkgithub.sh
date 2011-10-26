@@ -169,7 +169,8 @@ do
             break
             ;;
         *)
-            usage $EX_USAGE
+            echo "Not implemented: $1" >&2
+            usage 1
             ;;
     esac
 done
