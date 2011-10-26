@@ -187,7 +187,9 @@ then
         then
             tee -- "${config_write-}"
         else
-            > "${config_write-}"
+            set +o noclobber
+            cat > "$config_write"
+            set -o noclobber
         fi
     }
     verbose_echo "Writing configuration:"
