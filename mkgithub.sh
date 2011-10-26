@@ -158,7 +158,7 @@ do
             ;;
         -u|--user)
             user="$2"
-            shift
+            shift 2
             ;;
         -v|--verbose)
             verbose='--verbose'
