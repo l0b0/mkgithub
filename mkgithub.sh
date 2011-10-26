@@ -192,7 +192,7 @@ then
             set -o noclobber
         fi
     }
-    verbose_echo "Writing configuration:"
+    verbose_echo "Writing configuration in $config_write:"
     echo "# Generated configuration file
 protocol=$protocol
 user=$user" | write_config
