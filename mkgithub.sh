@@ -115,7 +115,7 @@ verbose_echo()
 }
 
 # Process parameters
-params="$(getopt -o chsu:v -l configure,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage
+params="$(getopt -o chsu:v -l configure,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $EX_USAGE
 
 eval set -- "$params"
 unset params
