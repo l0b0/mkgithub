@@ -15,11 +15,14 @@
 #               exit. If run as root, it writes to /etc/mkgithub.conf, otherwise
 #               it writes to ~/.mkgithub.
 #
+#        -g, --git
+#               Use git:// read-only remote URL.
+#
 #        -h, --https
-#               Use HTTPS remote URL.
+#               Use https:// remote URL.
 #
 #        -s, --ssh
-#               Use SSH remote URL (default).
+#               Use ssh:// remote URL (default).
 #
 #        -u, --user=username
 #               GitHub username. Default your github.user configuration value.
@@ -111,7 +114,7 @@ verbose_echo()
 }
 
 # Process parameters
-params="$(getopt -o chsu:v -l configure,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $EX_USAGE
+params="$(getopt -o cghsu:v -l configure,git,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $EX_USAGE
 
 eval set -- "$params"
 unset params
@@ -143,6 +146,10 @@ do
             ;;
         --help)
             usage
+            ;;
+        -g|--git)
+            protocol=git
+            shift
             ;;
         -h|--https)
             protocol=https
@@ -210,6 +217,9 @@ do
 
     repo_name="$(basename -- "$repo_path")"
     case $protocol in
+        git)
+            repo_url="git://github.com/${user}/${repo_name}.git"
+            ;;
         https)
             repo_url="https://${user}@github.com/${user}/${repo_name}.git"
             ;;
