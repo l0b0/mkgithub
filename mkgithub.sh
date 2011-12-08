@@ -180,7 +180,7 @@ protocol=${protocol-ssh}
 user="${user-$USER}"
 
 # Write configuration
-if [ -n "${config_write-}" ]
+if [ "${config_write+defined}" = defined ]
 then
     write_config() {
         if [ "${verbose+defined}" = defined ]
