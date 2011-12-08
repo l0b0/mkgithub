@@ -22,7 +22,7 @@
 #               Use SSH remote URL (default).
 #
 #        -u, --user=username
-#               GitHub username. Default your current login ($USER).
+#               GitHub username. Default your github.user configuration value.
 #
 #        --help
 #               Display this information and quit.
@@ -38,13 +38,9 @@
 #        protocol=ssh
 #               Remote URL protocol (ssh or https).
 #
-#        user="$USER"
-#               GitHub username.
-#
 # EXAMPLES
-#        mkgithub -chu jdoe
-#               Configure mkgithub to use HTTPS remote URLs and the jdoe
-#               username.
+#        mkgithub -ch
+#               Configure mkgithub to use HTTPS remote URLs.
 #
 #        mkgithub ~/dev/mkgithub
 #               Make ready for your own mkgithub clone :)
@@ -177,7 +173,7 @@ done
 
 # Defaults
 protocol=${protocol-ssh}
-user="${user-$USER}"
+user="${user-$(git config github.user)}" || usage $EX_USAGE
 
 # Write configuration
 if [ "${config_write+defined}" = defined ]
@@ -194,8 +190,7 @@ then
     }
     verbose_echo "Writing configuration in $config_write:"
     echo "# Generated configuration file
-protocol=$protocol
-user=$user" | write_config
+protocol=$protocol" | write_config
     exit
 fi
 
