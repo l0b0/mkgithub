@@ -33,14 +33,20 @@ test_invalid() {
 
 test_simple() {
     local -r test_dir="$(mktemp -d -u --tmpdir="${__shunit_tmpDir}")"
-    assertTrue "Simple project name" "\"$cmd\" \"$test_dir\""
-    assertTrue "Remove repo dir" "rm -r -- \"$test_dir\""
+    assertEquals \
+        "Simple project name" \
+        0 \
+        "$("$cmd" -u test -- "$test_dir" &>/dev/null; echo $?)"
+    assertEquals "Remove repo dir" 0 "$(rm -r -- "$test_dir"; echo $?)"
 }
 
 test_complex(){
     local -r test_dir="$__shunit_tmpDir"/$'--$`\! *@ \a\b\E\f\r\t\v\\\"\' \n'
-    assertTrue "Complex project name" "\"$cmd\" -- $(printf %q "$test_dir")"
-    assertTrue "Remove repo dir" "rm -r -- $(printf %q "$test_dir")"
+    assertEquals \
+        "Complex project name" \
+        0 \
+        "$("$cmd" -u test -- "$test_dir" &>/dev/null; echo $?)"
+    assertEquals "Remove repo dir" 0 "$(rm -r -- "$test_dir"; echo $?)"
 }
 
 # load and run shUnit2
