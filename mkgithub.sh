@@ -4,7 +4,7 @@
 #        mkgithub.sh - Create a local GitHub repository
 #
 # SYNOPSIS
-#        mkgithub [<options>] [directories]
+#        mkgithub.sh [<options>] [directories]
 #
 # DESCRIPTION
 #        Creates the directories, initializes them as Git repositories, and
@@ -42,10 +42,10 @@
 #               Remote URL protocol (ssh or https).
 #
 # EXAMPLES
-#        mkgithub -ch
+#        mkgithub.sh -ch
 #               Configure mkgithub to use HTTPS remote URLs.
 #
-#        mkgithub ~/dev/mkgithub
+#        mkgithub.sh ~/dev/mkgithub
 #               Make ready for your own mkgithub clone :)
 #
 # BUGS
