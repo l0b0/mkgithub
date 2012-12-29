@@ -14,8 +14,4 @@ install:
 	install $(SOURCE_PATH) $(TARGET_PATH)
 	sed -i -e 's/\(\.\/\)\?$(SOURCE_FILE)/$(TARGET_FILE)/g' $(TARGET_PATH)
 
-.PHONY: uninstall
-uninstall:
-	rm $(TARGET_PATH)
-
 include tools.mk
