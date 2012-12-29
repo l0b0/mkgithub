@@ -52,7 +52,7 @@
 #        https://github.com/l0b0/mkgithub/issues
 #
 # COPYRIGHT
-#        Copyright (C) 2011 Victor Engmark
+#        Copyright (C) 2011, 2012 Victor Engmark
 #
 #        This program is free software: you can redistribute it and/or modify
 #        it under the terms of the GNU General Public License as published by
@@ -71,47 +71,12 @@
 
 set -o errexit -o noclobber -o nounset -o pipefail
 
-# Exit codes from /usr/include/sysexits.h, as recommended by
-# http://www.faqs.org/docs/abs/HTML/exitcodes.html
-EX_USAGE=64       # command line usage error
-
-usage() {
-    # Print documentation until the first empty line
-    # @param $1: Exit code (optional)
-    while IFS= read -r -u 9
-    do
-        if [[ -z "$REPLY" ]]
-        then
-            exit ${1:-0}
-        elif [[ "${REPLY:0:2}" == '#!' ]]
-        then
-            # Shebang line
-            continue
-        fi
-        echo "${REPLY:2}" # Remove comment characters
-    done 9< "$0"
-}
-
-verbose_echo()
-{
-    # @param $1: Optionally '-n' for echo to output without newline
-    # @param $(1|2)...: Messages
-    if [ "${verbose-}" ]
-    then
-        if [ "${1-}" = "-n" ]
-        then
-            local -r newline='-n'
-            shift
-        fi
-
-        while [ "${1+defined}" = defined ]
-        do
-            echo -e ${newline-} "$1" >&2
-            shift
-        done
-    fi
-    true
-}
+includes="$(dirname -- "$0")"/shell-includes
+. "$includes"/error.sh
+. "$includes"/usage.sh
+. "$includes"/variables.sh
+. "$includes"/verbose_echo.sh
+unset includes
 
 # Process parameters
 params="$(getopt -o cghsu:v -l configure,git,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $EX_USAGE
@@ -204,8 +169,7 @@ fi
 # Create repositories
 if [ ${#@} -eq 0 ]
 then
-    echo "No directory specified. See --help for more information." >&2
-    exit $EX_USAGE
+    error "No directory specified. See --help for more information." $ex_usage
 fi
 
 for repo_path
@@ -227,8 +191,7 @@ do
             repo_url="git@github.com:${user}/${repo_name}.git"
             ;;
         *)
-            echo "Unknown protocol $protocol" >&2
-            exit 1
+            error "Unknown protocol $protocol" $ex_unknown
             ;;
     esac
     git remote ${verbose-} add origin -- "$repo_url"
