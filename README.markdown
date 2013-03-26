@@ -6,6 +6,7 @@ Create a local GitHub repository with a single command.
 Installation
 ------------
 
+    git submodule update
     make test
     sudo make install
 
