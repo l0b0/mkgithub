@@ -3,6 +3,14 @@ mkgithub
 
 Create a local GitHub repository with a single command.
 
+Test
+----
+
+Requires `shunit2`.
+
+    git submodule update --init
+    make test
+
 Installation
 ------------
 
