@@ -79,7 +79,7 @@ includes="$(dirname -- "$0")"/shell-includes
 unset includes
 
 # Process parameters
-params="$(getopt -o cghsu:v -l configure,git,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $EX_USAGE
+params="$(getopt -o cghsu:v -l configure,git,help,https,ssh,user:,verbose --name "$0" -- "$@")" || usage $ex_usage
 
 eval set -- "$params"
 unset params
@@ -145,7 +145,7 @@ done
 
 # Defaults
 protocol=${protocol-ssh}
-user="${user-$(git config github.user)}" || usage $EX_USAGE
+user="${user-$(git config github.user)}" || usage $ex_usage
 
 # Write configuration
 if [ "${config_write+defined}" = defined ]
