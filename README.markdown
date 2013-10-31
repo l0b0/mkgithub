@@ -8,13 +8,13 @@ Test
 
 Requires `shunit2`.
 
-    git submodule update --init
     make test
 
 Installation
 ------------
 
-    git submodule update
+    git clone --recurse-submodules https://github.com/l0b0/mkgithub.git
+    cd mkgithub
     make test
     sudo make install
 
