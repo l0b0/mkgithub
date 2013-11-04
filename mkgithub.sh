@@ -167,7 +167,7 @@ protocol=$protocol" | write_config
 fi
 
 # Create repositories
-if [ ${#@} -eq 0 ]
+if [ $# -eq 0 ]
 then
     error "No directory specified. See --help for more information." $ex_usage
 fi
