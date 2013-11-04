@@ -52,7 +52,7 @@
 #        https://github.com/l0b0/mkgithub/issues
 #
 # COPYRIGHT
-#        Copyright (C) 2011, 2012 Victor Engmark
+#        Copyright (C) 2011-2013 Victor Engmark
 #
 #        This program is free software: you can redistribute it and/or modify
 #        it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ includes="$(dirname -- "$0")"/shell-includes
 . "$includes"/error.sh
 . "$includes"/usage.sh
 . "$includes"/variables.sh
-. "$includes"/verbose_echo.sh
+. "$includes"/verbose_print_line.sh
 unset includes
 
 # Process parameters
@@ -160,7 +160,7 @@ then
             set -o noclobber
         fi
     }
-    verbose_echo "Writing configuration in $config_write:"
+    verbose_print_line "Writing configuration in $config_write:"
     echo "# Generated configuration file
 protocol=$protocol" | write_config
     exit
