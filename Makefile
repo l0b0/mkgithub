@@ -1,12 +1,12 @@
-prefix = /usr/local
-bindir = $(prefix)/bin
-sharedir = $(prefix)/share
+PREFIX = /usr/local
+BIN_DIR = $(PREFIX)/bin
+SHARE_DIR = $(PREFIX)/share
 
 name = $(notdir $(CURDIR))
 script = $(name).sh
-installed_script = $(bindir)/$(name)
+installed_script = $(BIN_DIR)/$(name)
 
-include_path = $(sharedir)/$(name)
+include_path = $(SHARE_DIR)/$(name)
 
 .PHONY: test
 test:
