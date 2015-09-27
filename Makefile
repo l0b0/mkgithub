@@ -1,6 +1,7 @@
 PREFIX = /usr/local
 BIN_DIR = $(PREFIX)/bin
 SHARE_DIR = $(PREFIX)/share
+RUBY_BIN_DIR = /usr/bin
 
 name = $(notdir $(CURDIR))
 script = $(name).sh
@@ -11,6 +12,10 @@ include_path = $(SHARE_DIR)/$(name)
 .PHONY: test
 test:
 	$(CURDIR)/test.sh
+
+.PHONY: lint
+lint:
+	$(RUBY_BIN_DIR)/travis-lint .travis.yml
 
 .PHONY: install
 install: $(include_path)
