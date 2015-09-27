@@ -7,7 +7,7 @@
 #    https://github.com/l0b0/mkgithub/issues
 #
 # COPYRIGHT AND LICENSE
-#    Copyright (C) 2011-2012 Victor Engmark
+#    Copyright (C) 2011, 2012, 2015 Victor Engmark
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -52,13 +52,7 @@ test_complex(){
 
 # load and run shUnit2
 test -n "${ZSH_VERSION:-}" && SHUNIT_PARENT=$0
-for shunit2_path in /usr/bin/shunit2 /usr/share/shunit2/shunit2
-do
-    if [ -e "$shunit2_path" ]
-    then
-        . "$shunit2_path"
-        exit
-    fi
-done
+shunit2="${shunit2-shunit2}"
+. "$shunit2"
 echo "$(basename -- "$0"): No shunit2 executable found" >&2
 exit 1
