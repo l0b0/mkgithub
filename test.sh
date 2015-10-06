@@ -54,5 +54,3 @@ test_complex(){
 test -n "${ZSH_VERSION:-}" && SHUNIT_PARENT=$0
 shunit2="${shunit2-shunit2}"
 . "$shunit2"
-echo "$(basename -- "$0"): No shunit2 executable found" >&2
-exit 1
