@@ -1,3 +1,5 @@
+**Moved to [GitLab](https://gitlab.com/victor-engmark/mkrepo)**
+
 [![Build Status](https://travis-ci.org/l0b0/mkgithub.svg?branch=master)](https://travis-ci.org/l0b0/mkgithub)
 
 mkgithub
